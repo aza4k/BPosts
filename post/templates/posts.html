@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Posts Page{% endblock %}
+
+
+{% block content %}
+
+
+<div id="intro-example" class="p-5 text-center bg-image "
+  style="background-image: url('https://images.pexels.com/photos/18684565/pexels-photo-18684565/free-photo-of-old-tenements-in-city.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load');">
+  <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <div class="text-white">
+        <h1 class="mb-3">Latest Posts</h1>
+
+        {% if user.is_authenticated %}
+
+        <a class="btn btn-outline-light btn-lg m-2" href="{% url 'posts:create' %}" role="button" rel="nofollow" target="_blank">Add
+          Post</a>
+        {% else %}
+        <h5 class="mb-4">Sign up to post!</h5>
+        <a class="btn btn-outline-light btn-lg m-2" href="{% url 'auth:login' %}" role="button" rel="nofollow"
+          target="_blank">Login</a>
+        <a class="btn btn-outline-light btn-lg m-2" href="{% url 'auth:signup' %}" target="_blank" role="button">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+<section class="text-center mb-10" style="margin-top: 7%;">
+
+
+
+  <div class="row gx-lg-5">
+    {% for post in posts %}
+    <div class="col-lg-4 col-md-12 mb-7">
+
+      <div class="card rounded-6 h-100">
+        <div class="bg-image hover-overlay ripple mx-3 shadow-4-strong rounded-6 mt-n3" data-mdb-ripple-color="light">
+          <img src="{{ post.image.url }}" class="w-100">
+
+          <a href="{% url 'posts:detail' pk=post.id %}">
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+          </a>
+
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+
+          <p class="text-muted">{{ post.description }}</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- Column -->
+    {% endfor %}
+</section>
+<!-- Section: Posts -->
+
+
+
+{% endblock %}
+
+{% block footer %}Custom Footer{% endblock %}

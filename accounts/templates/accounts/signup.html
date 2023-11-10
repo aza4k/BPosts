@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div style="margin-left: 10%;margin-right: 10%;">
+<section class="signup-section">
+    <div class="py-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+        <div class="row gx-lg-5 align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h1 class="my-5 display-3 fw-bold ls-tight">
+                    The best offer <br />
+                    <span class="text-primary">for your business</span>
+                </h1>
+                <p style="color: hsl(217, 10%, 50.8%)">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Eveniet, itaque accusantium odio, soluta, corrupti aliquam
+                    quibusdam tempora at cupiditate quis eum maiores libero
+                    veritatis? Dicta facilis sint aliquid ipsum atque?
+                </p>
+            </div>
+
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <div class="card">
+                    <div class="card-body py-5 px-md-5">
+                        <div class="container py-5">
+                            <h1>Register</h1>
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button class="btn btn-primary" type="submit">Register</button>
+                            </form>
+                            <p class="text">If you already have an account, <a href="/login">login</a> instead.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+{% endblock %}
