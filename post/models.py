@@ -2,7 +2,6 @@ from django.db import models
 
 class Post(models.Model):
 	title = models.CharField(max_length=255)
-	slug = models.SlugField(max_length=255)
 	image = models.ImageField(upload_to='posts/%Y/%m/%d')
 	description = models.TextField()
 	aviable = models.BooleanField(default=True)

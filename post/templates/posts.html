@@ -7,7 +7,7 @@
 
 
 <div id="intro-example" class="p-5 text-center bg-image "
-  style="background-image: url('https://images.pexels.com/photos/18684565/pexels-photo-18684565/free-photo-of-old-tenements-in-city.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load');">
+  style="background-image: url('https://source.unsplash.com/random/1000x1000?sig=1');">
   <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
     <div class="d-flex justify-content-center align-items-center h-100">
       <div class="text-white">
@@ -52,7 +52,7 @@
         <div class="card-body">
           <h5 class="card-title">{{ post.title }}</h5>
 
-          <p class="text-muted">{{ post.description }}</p>
+          <p class="text-muted">{{ post.description|wordwrap:10 }}</p>
         </div>
       </div>
 
