@@ -82,15 +82,10 @@ WSGI_APPLICATION = 'src.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'URL': 'postgres://ufukhiel:0km-aNicx0ww_EDwNY35ZlUbaTaWydMi@rain.db.elephantsql.com/ufukhiel',
-        'NAME': 'ufukhiel',
-        'USER': 'ufukhiel',
-        'PASSWORD': '0km-aNicx0ww_EDwNY35ZlUbaTaWydMi',
-        'HOST': 'rain.db.elephantsql.com',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -121,14 +116,5 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-STORAGES = {
-    "default":{
-        "BACKEND":"django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles":{
-        "BACKEND":"whitenoise.storage.CompressedStaticFilesStorage",
-    },
-}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
