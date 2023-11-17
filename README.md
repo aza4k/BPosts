@@ -16,13 +16,19 @@ This project is a simple blog post website built using the Django web framework.
    git clone https://github.com/aza4k/BPosts.git
    ```
 
-2. Create a virtual environment:
+2. Open folder:
+
+   ```bash
+   cd BPosts/
+   ```
+
+3. Create a virtual environment:
 
    ```bash
    virtualenv venv
    ```
 
-3. Activate the virtual environment:
+4. Activate the virtual environment:
 
    - On Windows:
 
@@ -36,25 +42,25 @@ This project is a simple blog post website built using the Django web framework.
      source venv/bin/activate
      ```
 
-4. Install dependencies:
+5. Install dependencies:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-5. Apply database migrations:
+6. Apply database migrations:
 
    ```bash
    python manage.py migrate
    ```
 
-6. Run the development server:
+7. Run the development server:
 
    ```bash
    python manage.py runserver
    ```
 
-7. Open your browser and navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view the website.
+8. Open your browser and navigate to [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view the website.
 
 ## Usage
 
