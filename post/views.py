@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Post
 from django.http import Http404
 from .forms import PostForm, PostUpdateForm
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -10,7 +11,7 @@ def home(request):
 
 def posts(request):
     try:
-        posts = Post.objects.all()
+        posts = Post.objects.all().order_by('-created')
     except Post.DoesNotExist:
         raise Http404("Post does not exist")
     
@@ -32,16 +33,18 @@ def detail(request, pk):
 
 # ------------
 
-
+@login_required
 def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
             return redirect('posts:posts')
     else:
         form = PostForm()
-    
+
     context = {
         'form': form
     }
@@ -52,7 +55,7 @@ def post_delete(request, post_id):
 
     if request.method == 'POST':
         post.delete()
-        return redirect('posts:posts')  # Redirect to the list of posts
+        return redirect('posts:posts')
 
     context = {
         'post': post

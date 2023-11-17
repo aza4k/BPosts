@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{%load crispy_forms_tags %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+            <h2 class="h3 mb-4 page-title">Settings</h2>
+            <div class="my-4">
+                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                            aria-controls="home" aria-selected="false">Profile</a>
+                    </li>
+                </ul>
+                <form method='POST' enctype='multipart/form-data'>
+                    {%csrf_token%}
+
+                    <div class="row mt-5 align-items-center">
+                        <div class="col-md-3 text-center mb-5">
+                            <div class="avatar avatar-xl">
+                                <img src="{{request.user.userdetail.image.url}}" alt="Profile Image"
+                                    class="avatar-img rounded" style="width: 75%; height:75%" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row align-items-center">
+
+                            </div>
+                          
+
+                                <div class="col">
+                                    <div class="col-md-7">
+                                        <h4 class="mb-1"><i class="fas fa-user"></i> {{request.user.first_name}}
+                                            {{request.user.last_name}}</h4>
+                                        <p class="small mb-3"><span
+                                                class="badge badge-dark">{{request.user.userdetail.adress}}</span></p>
+                                    </div>
+
+                                    </p>
+                                    <p class="small mb-0 text-muted"><i
+                                            class="fas fa-phone"></i>{{request.user.userdetail.number}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4" />
+                    {{ uform|crispy }}
+                    {{ pform|crispy }}
+
+                    </br>
+                    <button type="submit" class="btn btn-primary">Save Change</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

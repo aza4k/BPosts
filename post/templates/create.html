@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{%load crispy_forms_tags %}
 {% block title %}Create Page{% endblock %}
 
 {% block content %}
@@ -7,8 +8,10 @@
 <h1>Create a New Post</h1>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
+</br>
     <button class="btn btn-success" type="submit">Create Product</button>
 </form>
 </div>
+
 {% endblock %}
