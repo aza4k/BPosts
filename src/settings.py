@@ -17,17 +17,39 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    # Apps
     'post',
     'api',
     'accounts',
+    # Insralled & used
+    'ckeditor',
+    'ckeditor_uploader',
     'crispy_forms',
     'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
     'crispy_bootstrap4',
+    'hitcount',
 ]
 
+# CKEditor
+
+CKEDITOR_CONFIGS = {
+    'awesome_ckeditor': {
+        'toolbar': 'Full',
+    },
+}
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_RESTRICT_BY_USER = True
+
+# Crispy Forms
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+# DJ Rest Auth
 
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
@@ -39,6 +61,8 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 
+
+# Jazmin Admin Panel
 
 JAZZMIN_UI_TWEAKS = {
     "theme": "slate",
@@ -112,9 +136,9 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = str(BASE_DIR / 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

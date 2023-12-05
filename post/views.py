@@ -3,7 +3,9 @@ from .models import Post
 from django.http import Http404
 from .forms import PostForm, PostUpdateForm
 from django.contrib.auth.decorators import login_required
-
+from hitcount.views import HitCountDetailView
+from hitcount.views import HitCountMixin
+from hitcount.utils import get_hitcount_model
 
 def home(request):
     return render(request, 'home.html')
@@ -23,15 +25,19 @@ def posts(request):
 def detail(request, pk):
     try:
         post = Post.objects.get(id=pk)
+        hit_count = get_hitcount_model().objects.get_for_object(post)
+        hits = hit_count.hits
+        hit_count_response = HitCountMixin.hit_count(request, hit_count)
+        if hit_count_response.hit_counted:
+            hits += 1
     except Post.DoesNotExist:
         raise Http404("Post does not exist")
     
     context = {
-        'post': post
+        'post': post,
+        'hits':hits
     }
     return render(request, 'detail.html', context)
-
-# ------------
 
 @login_required
 def post_create(request):
@@ -72,6 +78,7 @@ def post_update(request, post_id):
     if request.method == 'POST':
         form = PostUpdateForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
+            post.author = request.user
             form.save()
             return redirect('posts:posts')
     else:
@@ -82,3 +89,4 @@ def post_update(request, post_id):
         'post': post
     }
     return render(request, 'update.html', context)
+

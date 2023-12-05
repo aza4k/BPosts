@@ -3,7 +3,9 @@
 {%load crispy_forms_tags %}
 {% block title %}Update Page{% endblock %}
 
+
 {% block content %}
+
 
 {% if user.is_authenticated and user == post.author %}
 
@@ -13,6 +15,7 @@
     <h1>Update Post: {{ product.title }}</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        {{ form.media }}
         {{ form|crispy }}
         </br>
         <button class="btn btn-success" type="submit">Save</button>

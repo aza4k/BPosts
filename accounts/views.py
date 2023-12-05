@@ -6,8 +6,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import *
 
-
-
 @login_required
 def profile(request):
     if request.method == 'POST':
@@ -21,11 +19,9 @@ def profile(request):
         pform = ProfileUpdate(instance=request.user.userdetail)
     return render(request, 'profile.html', {'uform':uform, 'pform':pform})
 
-
-
 def login_view(request):
     if request.user.is_authenticated:
-        return redirect('posts:posts')  # Redirect to a different page if already logged in
+        return redirect('posts:posts')
 
     if request.method == 'POST':
         username = request.POST['username']
@@ -38,16 +34,13 @@ def login_view(request):
             messages.error(request, 'Invalid credentials. Please try again.')
     return render(request, 'accounts/login.html')
 
-
 def logout_view(request):
     logout(request)
-    return redirect('auth:login')  # Redirect to the login page after logout
-
-
+    return redirect('auth:login')
 
 def register_view(request):
     if request.user.is_authenticated:
-        return redirect('posts:posts')  # Redirect to a different page if already logged in
+        return redirect('posts:posts')
 
     if request.method == 'POST':
         form = RegistrationForm(request.POST)

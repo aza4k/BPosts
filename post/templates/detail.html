@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Detail Page{% endblock %}
+{% load hitcount_tags %}
 
 {% block content %}
 
@@ -32,15 +33,16 @@
           <div class="row align-items-center mb-4">
             <div class="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
 
-              <span> Published <u>{{ post.created }}</u> by</span>
+              <span>Published <i>{{ post.created }}</i> by</span>
               <a href="" class="text-dark">{{ post.author }}</a>
-              <img src="{{ post.author.userdetail.image.url }}" class="rounded-5 shadow-1-strong me-2" height="35"
-                alt="" loading="lazy" />
+              <img style="width: 55px; height: 45px;" src="{{ post.author.userdetail.image.url }}"
+                class="rounded-circle shadow-4-strong me-2" alt="Profile" loading="lazy" />
+              <p>Views:<i class="fas fa-eye ms-2"></i> {{ hits }} </p>
             </div>
           </div>
         </section>
         <section>
-          <p>{{ post.description }}</p>
+          <p>{{ post.description | safe }}</p>
 
         </section>
       </div>
@@ -78,8 +80,8 @@
             <h5 class="mb-4">You could have an ad here...</h5>
 
             <div class="embed-responsive embed-responsive-16by9 shadow-4-strong">
-              <img class="embed-responsive-item rounded" style="width:50%" src="https://www.smaroadsafety.com/wp-content/uploads/2022/06/no-pic.png"
-                allowfullscreen></img>
+              <img class="embed-responsive-item rounded" style="width:50%"
+                src="https://www.smaroadsafety.com/wp-content/uploads/2022/06/no-pic.png" allowfullscreen></img>
             </div>
           </section>
         </section>

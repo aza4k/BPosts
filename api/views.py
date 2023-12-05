@@ -5,19 +5,17 @@ from post.models import Post
 from .serializers import PostSerializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import PostPermission, PostDetailPermission
-from django.http import Http404  # Import Http404 for exception handling
+from django.http import Http404
 
 class PostListAPIView(APIView):
     permission_classes = [PostPermission]
 
     def get(self, request):
-        # Retrieve all posts
         posts = Post.objects.all()
         serializer = PostSerializer(posts, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
-        # Create a new post
         serializer = PostSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -38,9 +36,7 @@ class PostDetailAPIView(APIView):
             return Response(serializer.data, status=HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
-
     def delete(self, request, pk):
-        # Delete a specific post
         post = self.get_object(pk)
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
